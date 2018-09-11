@@ -1,0 +1,14 @@
+[IdeeënBox]
+1. Christmas Sleigh as Truck
+2. Christmas present stack as scaffholding
+3. Christmas world, Amazon world
+4. Christmastree as decoration
+5. When the presents are loaded in the truck, shining stars effect on the sleigh
+6. The warehouse is "Christmas workshop"
+7. Nutcracker as decoration
+8. Candycans as decoration
+
+[Must]
+1. Christmas Sleigh as Truck
+2. Christmas present stack as scaffholding
+6. The warehouse is "Christmas workshop"
