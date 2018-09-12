@@ -12,11 +12,11 @@ namespace Models
         {
         }
 
-        public override bool Update(int tick)
-        {
-            //
+        //public override bool Update(int tick)
+        //{
+        //    //
 
-            return base.Update(tick);
-        }
+        //    return base.Update(tick);
+        //}
     }
 }
