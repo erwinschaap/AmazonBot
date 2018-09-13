@@ -12,15 +12,32 @@ namespace Models
 
         public World()
         {
-            Robot r = CreateRobot(0, 0, 0);
-            r.Move(8, 0, 0);
+            Truck truck = CreateTruck(0, 0, 0);
+            truck.Move(10, 0, 0);
+            Robot robot = CreateRobot(0, 0, 0);
+            robot.Move(8, 0, 0);
+
+        }
+
+        private Scaffholding CreateScaffholding(double x, double y, double z)
+        {
+            Scaffholding scaffholding = new Scaffholding(x, y, z, 0, 0, 0);
+            worldObjects.Add(scaffholding);
+            return scaffholding;
+        }
+
+        private Truck CreateTruck(double x, double y, double z)
+        {
+            Truck truck = new Truck(x, y, z, 0, 0, 0);
+            worldObjects.Add(truck);
+            return truck;
         }
 
         private Robot CreateRobot(double x, double y, double z)
         {
-            Robot r = new Robot(x, y, z, 0, 0, 0);
-            worldObjects.Add(r);
-            return r;
+            Robot robot = new Robot(x, y, z, 0, 0, 0);
+            worldObjects.Add(robot);
+            return robot;
         }
 
         public IDisposable Subscribe(IObserver<Command> observer)
@@ -34,20 +51,21 @@ namespace Models
             return new Unsubscriber<Command>(observers, observer);
         }
 
-        private void SendCommandToObservers(Command c)
+        private void SendCommandToObservers(Command command)
         {
             for (int i = 0; i < this.observers.Count; i++)
             {
-                this.observers[i].OnNext(c);
+                this.observers[i].OnNext(command);
             }
         }
 
         private void SendCreationCommandsToObserver(IObserver<Command> obs)
         {
-            foreach (Robot m3d in worldObjects)
+            foreach (Model3D m3d in worldObjects)
             {
                 obs.OnNext(new UpdateModel3DCommand(m3d));
             }
+
         }
 
         public bool Update(int tick)

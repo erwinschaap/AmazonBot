@@ -8,7 +8,7 @@ namespace Models
     public class Scaffholding : Model3D, IUpdatable
     {
         public Scaffholding(double x, double y, double z, double rotationX, double rotationY, double rotationZ) :
-            base("Scaffholding", x, y, z, rotationX, rotationY, rotationZ)
+            base("scaffholding", x, y, z, rotationX, rotationY, rotationZ)
         {
         }
 

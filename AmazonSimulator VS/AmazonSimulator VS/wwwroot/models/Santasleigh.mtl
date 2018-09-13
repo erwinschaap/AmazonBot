@@ -1,227 +1,24 @@
-# OBJ Material Export by Luxion KeyShot
+newmtl mat21
+  Kd 1.00 1.00 1.00
 
-newmtl Mahogany #2
-Kd 0.298039 0.141176 0.0901961
-Ks 1 1 1
+newmtl mat8
+  Kd 0.96 0.26 0.21
 
-newmtl Campbell #10
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
+newmtl mat13
+  Kd 1.00 0.60 0.00
 
-newmtl Campbell #10
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
+newmtl mat19
+  Kd 0.87 0.60 0.27
 
-newmtl Leather Perforated Black #12
-Kd 0.5 0.5 0.5
+newmtl mat23
+  Kd 0.10 0.10 0.10
 
-newmtl Leather Dark Red #15
-Kd 0.5 0.5 0.5
+newmtl mat12
+  Kd 1.00 0.92 0.23
 
-newmtl Campbell #10
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
+newmtl mat5
+  Kd 0.01 0.61 0.90
 
-newmtl Wood Planks #2
-Kd 0.5 0.5 0.5
+newmtl mat11
+  Kd 0.00 0.59 0.53
 
-newmtl Brass Polished #2
-Kd 0 0 0
-Ks 0.866667 0.741176 0.282353
-
-newmtl Brass Polished #17
-Kd 0 0 0
-Ks 0.866667 0.741176 0.282353
-
-newmtl Glass Window Generic Grey #8
-Kd 0 0 0
-Ks 0.652613 0.652613 0.658961
-
-newmtl Campbell #10
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
-
-newmtl Brass Polished #21
-Kd 0 0 0
-Ks 0.866667 0.741176 0.282353
-
-newmtl Material #4
-Kd 0.788235 0.788235 0.788235
-Ks 0 0 0
-
-newmtl Material #31
-Kd 0.894118 0.894118 0.894118
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #31
-Kd 0.894118 0.894118 0.894118
-Ks 0 0 0
-
-newmtl Material #5
-Kd 0.74902 0.74902 0.74902
-Ks 0 0 0
-
-newmtl Material #31
-Kd 0.894118 0.894118 0.894118
-Ks 0 0 0
-
-newmtl Material #5
-Kd 0.74902 0.74902 0.74902
-Ks 0 0 0
-
-newmtl Material #31
-Kd 0.894118 0.894118 0.894118
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #4
-Kd 0.788235 0.788235 0.788235
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #4
-Kd 0.788235 0.788235 0.788235
-Ks 0 0 0
-
-newmtl Material #5
-Kd 0.74902 0.74902 0.74902
-Ks 0 0 0
-
-newmtl Material #4
-Kd 0.788235 0.788235 0.788235
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #4
-Kd 0.788235 0.788235 0.788235
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #31
-Kd 0.894118 0.894118 0.894118
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Material #1
-Kd 1 1 1
-Ks 0 0 0
-
-newmtl Material #2
-Kd 0.682353 0.682353 0.682353
-Ks 0 0 0
-
-newmtl Brass Polished #9
-Kd 0 0 0
-Ks 0.866667 0.741176 0.282353
-
-newmtl Campbell #10
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
-
-newmtl Red Oak #1
-Kd 0.5 0.5 0.5
-
-newmtl Red Oak #5
-Kd 0.5 0.5 0.5
-
-newmtl Mahogany #2
-Kd 0.298039 0.141176 0.0901961
-Ks 1 1 1
-
-newmtl Mahogany #2
-Kd 0.298039 0.141176 0.0901961
-Ks 1 1 1
-
-newmtl Mahogany #2
-Kd 0.298039 0.141176 0.0901961
-Ks 1 1 1
-
-newmtl Campbell #10
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
-
-newmtl Wemyss #16
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
-
-newmtl Wemyss #16
-Kd 0.639216 0.639216 0.639216
-Ks 0 0 0
-
-newmtl Brick House_745636 #1
-Kd 0.5 0.5 0.5
-
-newmtl Default:0:0:0
-Kd 0 0 0
-Ks 0 0 0
-
-newmtl Default:0:0:0
-Kd 0 0 0
-Ks 0 0 0
-
-newmtl Material #31
-Kd 0.894118 0.894118 0.894118
-Ks 0 0 0
