@@ -9,6 +9,7 @@ namespace Models
     {
         private List<Model3D> worldObjects = new List<Model3D>();
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
+        private double MoveTruck = 0;
 
         public World()
         {
@@ -73,9 +74,13 @@ namespace Models
             for (int i = 0; i < worldObjects.Count; i++)
             {
                 Model3D u = worldObjects[i];
-
+                MoveTruck += 0.05;
                 if (u is IUpdatable)
                 {
+                    if (u is Truck)
+                    {
+                        u.Move(MoveTruck, 0, 0);
+                    }
                     bool needsCommand = ((IUpdatable)u).Update(tick);
 
                     if (needsCommand)
@@ -89,21 +94,21 @@ namespace Models
         }
     }
 
-    internal class Unsubscriber<Command> : IDisposable
-    {
-        private List<IObserver<Command>> _observers;
-        private IObserver<Command> _observer;
-
-        internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
+        internal class Unsubscriber<Command> : IDisposable
         {
-            this._observers = observers;
-            this._observer = observer;
-        }
+            private List<IObserver<Command>> _observers;
+            private IObserver<Command> _observer;
 
-        public void Dispose()
-        {
-            if (_observers.Contains(_observer))
-                _observers.Remove(_observer);
+            internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
+            {
+                this._observers = observers;
+                this._observer = observer;
+            }
+
+            public void Dispose()
+            {
+                if (_observers.Contains(_observer))
+                    _observers.Remove(_observer);
+            }
         }
     }
-}
