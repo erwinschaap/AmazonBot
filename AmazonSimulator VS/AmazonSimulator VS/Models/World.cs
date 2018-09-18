@@ -75,6 +75,9 @@ namespace Models
             {
                 Model3D u = worldObjects[i];
                 MoveTruck += 0.05;
+                if (MoveTruck >=24) {
+                    MoveTruck = -4;
+                }
                 if (u is IUpdatable)
                 {
                     if (u is Truck)
