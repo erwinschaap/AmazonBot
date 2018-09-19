@@ -71,7 +71,6 @@
                     .setPath(texturePath)
                     .load(textureName, function (materials) {
 
-                        //Waarom bestaat preload niet? Het is wel een bestaande functie
                         materials.preload();
 
                         new THREE.OBJLoader()
@@ -98,8 +97,9 @@
                             scene.add(building);
                             worldObjects[command.parameters.guid] = building;
 
-                            loadOBJModel("/models/", "building.obj", "/models/", "building.mtl", (mesh) => {
-                                building.position.y = 1;
+                            loadOBJModel("/models/", "Santasleigh.obj", "/models/", "Santasleigh.mtl", (mesh) => {
+                                building.position.y = 5;
+
                                 building.add(mesh);
                             });
                             
