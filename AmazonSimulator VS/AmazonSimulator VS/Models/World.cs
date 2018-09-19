@@ -8,16 +8,36 @@ namespace Models
     public class World : IObservable<Command>, IUpdatable
     {
         private List<Model3D> worldObjects = new List<Model3D>();
+        private List<Node> nodes = new List<Node>();
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
         private double MoveTruck = 0;
 
         public World()
         {
             Truck truck = CreateTruck(0, 0, 0);
-            truck.Move(10, 0, 0);
+            truck.Move(30, 0, 0);
             Robot robot = CreateRobot(0, 0, 0);
-            robot.Move(8, 0, 0);
+            robot.Move(0, 0, 0);
+            ShortestPath();
+        }
 
+        private void CreateNode(char name, int x, int y, int z)
+        {
+            Node n = new Node(name, x, y, z);
+            nodes.Add(n);
+        }
+        private void ShortestPath()
+        {
+            Graph g = new Graph();
+            g.add_vertex('A', new Dictionary<char, int>() { { 'B', 7 }, { 'C', 8 } });
+            g.add_vertex('B', new Dictionary<char, int>() { { 'A', 7 }, { 'F', 2 } });
+            g.add_vertex('C', new Dictionary<char, int>() { { 'A', 8 }, { 'F', 6 }, { 'G', 4 } });
+            g.add_vertex('D', new Dictionary<char, int>() { { 'F', 8 } });
+            g.add_vertex('E', new Dictionary<char, int>() { { 'H', 1 } });
+            g.add_vertex('F', new Dictionary<char, int>() { { 'B', 2 }, { 'C', 6 }, { 'D', 8 }, { 'G', 9 }, { 'H', 3 } });
+            g.add_vertex('G', new Dictionary<char, int>() { { 'C', 4 }, { 'F', 9 } });
+            g.add_vertex('H', new Dictionary<char, int>() { { 'E', 1 }, { 'F', 3 } });
+            g.shortest_path('A', 'H').ForEach(x => Console.WriteLine(x));
         }
 
         private Scaffholding CreateScaffholding(double x, double y, double z)
@@ -74,10 +94,10 @@ namespace Models
             for (int i = 0; i < worldObjects.Count; i++)
             {
                 Model3D u = worldObjects[i];
-                MoveTruck += 0.05;
-                if (MoveTruck >=24) {
-                    MoveTruck = -4;
-                }
+                //MoveTruck += 0.05;
+                //if (MoveTruck >=24) {
+                //    MoveTruck = -4;
+                //}
                 if (u is IUpdatable)
                 {
                     if (u is Truck)
