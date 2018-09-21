@@ -24,6 +24,17 @@ namespace Models
 
             //ShortestPath();
         }
+         public double CalculateDeltaX(Node begin, Node end)
+        {
+            double deltaX = begin.x - end.x;
+            return deltaX;
+        }
+
+        public double CalculateDeltaY(Node begin, Node end)
+        {
+            double deltaY = begin.y - end.y;
+            return deltaY;
+        }
 
         //private void ShortestPath()
         //{
