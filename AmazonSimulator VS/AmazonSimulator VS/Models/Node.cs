@@ -7,10 +7,10 @@ namespace Models
 {
     public class Node
     {
-        private char name { get; set; }
-        private int x { get; set; }
-        private int y { get; set; }
-        private int z { get; set; }
+        public char name { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public int z { get; set; }
 
         public Node(char name, int x, int y, int z)
         {

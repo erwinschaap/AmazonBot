@@ -5,20 +5,21 @@ namespace Models
 {
     class Graph
     {
-        Dictionary<Node, Dictionary<Node, int>> vertices = new Dictionary<Node, Dictionary<Node, int>>();
+        Dictionary<char, Dictionary<char, int>> vertices = new Dictionary<char, Dictionary<char, int>>();
 
-        public void add_vertex(Node name, Dictionary<Node, int> edges)
+        public void add_vertex(char name, Dictionary<char, int> edges)
         {
             vertices[name] = edges;
         }
 
-        public List<Node> shortest_path(Node start, Node finish)
+        public List<Node> shortest_path(char start, char finish, List<Node> nodes)
         {
-            var previous = new Dictionary<Node, Node>();
-            var distances = new Dictionary<Node, int>();
-            var nodes = new List<Node>();
+            var previous = new Dictionary<char, char>();
+            var distances = new Dictionary<char, int>();
+            var nodesCharList = new List<char>();
 
-            List<Node> path = null;
+            List<char> path = null;
+            List<Node> nodesPath = null;
 
             foreach (var vertex in vertices)
             {
@@ -31,19 +32,19 @@ namespace Models
                     distances[vertex.Key] = int.MaxValue;
                 }
 
-                nodes.Add(vertex.Key);
+                nodesCharList.Add(vertex.Key);
             }
 
-            while (nodes.Count != 0)
+            while (nodesCharList.Count != 0)
             {
-                nodes.Sort((x, y) => distances[x] - distances[y]);
+                nodesCharList.Sort((x, y) => distances[x] - distances[y]);
 
-                Node smallest = nodes[0];
-                nodes.Remove(smallest);
+                char smallest = nodesCharList[0];
+                nodesCharList.Remove(smallest);
 
                 if (smallest == finish)
                 {
-                    path = new List<Node>();
+                    path = new List<char>();
                     while (previous.ContainsKey(smallest))
                     {
                         path.Add(smallest);
@@ -68,8 +69,17 @@ namespace Models
                     }
                 }
             }
-
-            return path;
+            path.Add(start);
+            path.Reverse();
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                foreach (Node item in nodes)
+                {
+                    nodes.Add(item);
+                }
+            }
+            return nodesPath;
+            //return path;
         }
     }
 }
