@@ -6,13 +6,13 @@ namespace Models
     class Graph
     {
         Dictionary<char, Dictionary<char, int>> vertices = new Dictionary<char, Dictionary<char, int>>();
-
-        public void add_vertex(char name, Dictionary<char, int> edges)
+        
+        public void AddVertex(char name, Dictionary<char, int> edges)
         {
             vertices[name] = edges;
         }
 
-        public List<Node> shortest_path(char start, char finish, List<Node> nodes)
+        public List<Node> ShortestPath(char start, char finish, List<Node> nodes)
         {
             var previous = new Dictionary<char, char>();
             var distances = new Dictionary<char, int>();

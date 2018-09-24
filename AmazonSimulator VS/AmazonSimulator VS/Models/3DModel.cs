@@ -24,6 +24,9 @@ namespace Models
         public double rotationY { get { return _rY; } }
         public double rotationZ { get { return _rZ; } }
 
+        public double deltaX { get; set; }
+        public double deltaY { get; set; }
+
         public bool needsUpdate = true;
 
 

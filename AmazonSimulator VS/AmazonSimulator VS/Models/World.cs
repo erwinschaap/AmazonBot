@@ -5,53 +5,86 @@ using Controllers;
 
 namespace Models
 {
-    public class World : IObservable<Command>, IUpdatable
+    public class World : Calculations, IObservable<Command>, IUpdatable
     {
         private List<Model3D> worldObjects = new List<Model3D>();
         private List<Node> nodes = new List<Node>();
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
-        private double speed = 1;
+        private double moveTruck = 0;
+        public char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+        private int alphabetIndex;
 
         public World()
         {
+            CreateNodes(2, 10, 2, 0, 10);
+            
             Truck truck = CreateTruck(0, 0, 0);
             truck.Move(0, 0, 0);
             Robot robot = CreateRobot(0, 0, 0);
             robot.Move(0, 0, 0);
 
-            CreateNode('H', 30, 0, 0);
-            CreateNode('M', 0, 0, 0);
-
-            //ShortestPath();
-        }
-         public double CalculateDeltaX(Node begin, Node end)
-        {
-            double deltaX = begin.x - end.x;
-            return deltaX;
+            foreach (Node node in nodes)
+            {
+                Console.WriteLine("Node " + node.name + ": " + node.x + ", " + node.y + ", " + node.z);
+            }
         }
 
-        public double CalculateDeltaY(Node begin, Node end)
+        private void ShortestPath()
         {
-            double deltaY = begin.y - end.y;
-            return deltaY;
+            Graph g = new Graph();
+            g.AddVertex('A', new Dictionary<char, int>() { { 'B', 7 }, { 'C', 8 } });
+            g.AddVertex('B', new Dictionary<char, int>() { { 'A', 7 }, { 'F', 2 } });
+            g.AddVertex('C', new Dictionary<char, int>() { { 'A', 8 }, { 'F', 6 }, { 'G', 4 } });
+            g.AddVertex('D', new Dictionary<char, int>() { { 'F', 8 } });
+            g.AddVertex('E', new Dictionary<char, int>() { { 'H', 1 } });
+            g.AddVertex('F', new Dictionary<char, int>() { { 'B', 2 }, { 'C', 6 }, { 'D', 8 }, { 'G', 9 }, { 'H', 3 } });
+            g.AddVertex('G', new Dictionary<char, int>() { { 'C', 4 }, { 'F', 9 } });
+            g.AddVertex('H', new Dictionary<char, int>() { { 'E', 1 }, { 'F', 3 } });
+            g.ShortestPath('A', 'H', nodes).ForEach(x => Console.WriteLine(x));
         }
 
-        //private void ShortestPath()
-        //{
-        //    g.add_vertex('B', new Dictionary<Node, int>() { { 'A', 7 }, { 'F', 2 } });
-        //    g.add_vertex('C', new Dictionary<Node, int>() { { 'A', 8 }, { 'F', 6 }, { 'G', 4 } });
-        //    g.add_vertex('D', new Dictionary<Node, int>() { { 'F', 8 } });
-        //    g.add_vertex('E', new Dictionary<Node, int>() { { 'H', 1 } });
-        //    g.add_vertex('F', new Dictionary<Node, int>() { { 'B', 2 }, { 'C', 6 }, { 'D', 8 }, { 'G', 9 }, { 'H', 3 } });
-        //    g.add_vertex('G', new Dictionary<Node, int>() { { 'C', 4 }, { 'F', 9 } });
-        //    g.add_vertex('H', new Dictionary<Node, int>() { { 'E', 1 }, { 'F', 3 } });
-        //    g.shortest_path('A', 'H').ForEach(x => Console.WriteLine(x));
-        //}
-
-        private void CreateNode(char name, int x, int y, int z)
+        private void CreateNodes(int leftRow, int startYPositionLeftNodes, int rightRow, int startYPositionRightsNodes, int laneHight)
         {
-            Node node = new Node(name, x, y ,z);
+            int laneHightLeft = laneHight;
+            int laneHightRight = laneHight;
 
+            //Nodes in left row
+            for (int i = 0; i < leftRow; i++)
+            {
+                foreach (Node n2 in nodes)
+                {
+                    for (int j = 0; j < alphabet.Length; j++)
+                    {
+                        if (n2.name == alphabet[j])
+                        {
+                            alphabetIndex = j + 1;
+                        }
+                    }
+                    Console.WriteLine(alphabetIndex);
+                }
+                Node n = new Node(alphabet[alphabetIndex], laneHightLeft, startYPositionLeftNodes, 0);
+                nodes.Add(n);
+                laneHightLeft += laneHightLeft;
+            }
+
+            //Nodes in right row
+            for (int i = 0; i < rightRow; i++)
+            {
+                foreach (Node n2 in nodes)
+                {
+                    for (int j = 0; j < alphabet.Length; j++)
+                    {
+                        if (n2.name == alphabet[j])
+                        {
+                            alphabetIndex = j + 1;
+                        }
+                    }
+                    Console.WriteLine(alphabetIndex);
+                }
+                Node n = new Node(alphabet[alphabetIndex], laneHightRight, startYPositionRightsNodes, 0);
+                nodes.Add(n);
+                laneHightRight += laneHightRight;
+            }
         }
 
         private Scaffholding CreateScaffholding(double x, double y, double z)
@@ -118,7 +151,7 @@ namespace Models
                 {
                     if (u is Truck)
                     {
-                        u.Move(MoveTruck, 0, 0);
+                        u.Move(moveTruck, 0, 0);
                     }
                     bool needsCommand = ((IUpdatable)u).Update(tick);
 
@@ -133,21 +166,21 @@ namespace Models
         }
     }
 
-        internal class Unsubscriber<Command> : IDisposable
+    internal class Unsubscriber<Command> : IDisposable
+    {
+        private List<IObserver<Command>> _observers;
+        private IObserver<Command> _observer;
+
+        internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
         {
-            private List<IObserver<Command>> _observers;
-            private IObserver<Command> _observer;
+            this._observers = observers;
+            this._observer = observer;
+        }
 
-            internal Unsubscriber(List<IObserver<Command>> observers, IObserver<Command> observer)
-            {
-                this._observers = observers;
-                this._observer = observer;
-            }
-
-            public void Dispose()
-            {
-                if (_observers.Contains(_observer))
-                    _observers.Remove(_observer);
-            }
+        public void Dispose()
+        {
+            if (_observers.Contains(_observer))
+                _observers.Remove(_observer);
         }
     }
+}

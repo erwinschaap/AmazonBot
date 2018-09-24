@@ -11,6 +11,7 @@ namespace Models
         public int x { get; set; }
         public int y { get; set; }
         public int z { get; set; }
+        public List<Node> nodes { get; set; }
 
         public Node(char name, int x, int y, int z)
         {
@@ -20,9 +21,9 @@ namespace Models
             this.z = z;
         }
 
-        public char GetName()
+        public void SetNodesList(List<Node> nodes)
         {
-            return this.name;
+            this.nodes = nodes;
         }
     }
 }
