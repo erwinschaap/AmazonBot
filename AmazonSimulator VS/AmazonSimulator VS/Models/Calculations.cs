@@ -7,17 +7,10 @@ namespace Models
 {
     public class Calculations
     {
-
-        public int CalculateDeltaX(Node begin, Node end)
+        public int CalculateDistance(Node begin, Node end)
         {
-            int deltaX = begin.x - end.x;
-            return deltaX;
-        }
-
-        public int CalculateDeltaY(Node begin, Node end)
-        {
-            int deltaY = begin.y - end.y;
-            return deltaY;
+            int phytagoras = Convert.ToInt32(Math.Round(5.542 , 1));
+            return phytagoras;
         }
     }
 }

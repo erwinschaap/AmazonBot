@@ -3,12 +3,23 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    class Graph
+    class Graph : Calculations
     {
+        Dictionary<Node, List<Node>> allNodes = new Dictionary<Node, List<Node>>();
         Dictionary<char, Dictionary<char, int>> vertices = new Dictionary<char, Dictionary<char, int>>();
-        
-        public void AddVertex(char name, Dictionary<char, int> edges)
+
+        public void AddVertex(Node node)
         {
+            List<Node> nodesList = node.nodes;
+            allNodes.Add(node, nodesList);
+
+            char name = node.name;
+            Dictionary<char, int> edges = new Dictionary<char, int>();
+            foreach(Node node1 in nodesList)
+            {
+                int dist = CalculateDistance(node, node1);
+                edges.Add(node1.name, dist);
+            }
             vertices[name] = edges;
         }
 

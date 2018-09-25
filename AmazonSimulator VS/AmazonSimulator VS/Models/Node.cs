@@ -21,7 +21,7 @@ namespace Models
             this.z = z;
         }
 
-        public void SetNodesList(List<Node> nodes)
+        public void SetNodeConnection(List<Node> nodes)
         {
             this.nodes = nodes;
         }

@@ -16,8 +16,8 @@ namespace Models
 
         public World()
         {
-            CreateNodes(2, 10, 2, 0, 10);
-            
+            CreateNodes(4, 10, 0, 10);
+
             Truck truck = CreateTruck(0, 0, 0);
             truck.Move(0, 0, 0);
             Robot robot = CreateRobot(0, 0, 0);
@@ -25,66 +25,119 @@ namespace Models
 
             foreach (Node node in nodes)
             {
-                Console.WriteLine("Node " + node.name + ": " + node.x + ", " + node.y + ", " + node.z);
+                Console.WriteLine("Node " + node.name + ": " + node.x + ", " + node.y + ", " + node.z + ", " + node.nodes);
             }
+            Console.WriteLine("Nodes Count :" + nodes.Count());
         }
 
-        private void ShortestPath()
-        {
-            Graph g = new Graph();
-            g.AddVertex('A', new Dictionary<char, int>() { { 'B', 7 }, { 'C', 8 } });
-            g.AddVertex('B', new Dictionary<char, int>() { { 'A', 7 }, { 'F', 2 } });
-            g.AddVertex('C', new Dictionary<char, int>() { { 'A', 8 }, { 'F', 6 }, { 'G', 4 } });
-            g.AddVertex('D', new Dictionary<char, int>() { { 'F', 8 } });
-            g.AddVertex('E', new Dictionary<char, int>() { { 'H', 1 } });
-            g.AddVertex('F', new Dictionary<char, int>() { { 'B', 2 }, { 'C', 6 }, { 'D', 8 }, { 'G', 9 }, { 'H', 3 } });
-            g.AddVertex('G', new Dictionary<char, int>() { { 'C', 4 }, { 'F', 9 } });
-            g.AddVertex('H', new Dictionary<char, int>() { { 'E', 1 }, { 'F', 3 } });
-            g.ShortestPath('A', 'H', nodes).ForEach(x => Console.WriteLine(x));
-        }
-
-        private void CreateNodes(int leftRow, int startYPositionLeftNodes, int rightRow, int startYPositionRightsNodes, int laneHight)
+        private void CreateNodes(int nrOfNodesLeftAndRight, int startZPositionLeftNodes, int startZPositionRightsNodes, int laneHight)
         {
             int laneHightLeft = laneHight;
-            int laneHightRight = laneHight;
+            Node n = new Node(alphabet[0], 0, 0, ((startZPositionLeftNodes - startZPositionRightsNodes) / 2));
+            nodes.Add(n);
 
             //Nodes in left row
-            for (int i = 0; i < leftRow; i++)
+            for (int i = 0; i < nrOfNodesLeftAndRight; i++)
             {
-                foreach (Node n2 in nodes)
+                foreach (Node node in nodes)
                 {
                     for (int j = 0; j < alphabet.Length; j++)
                     {
-                        if (n2.name == alphabet[j])
+                        if (node.name == alphabet[j])
                         {
                             alphabetIndex = j + 1;
                         }
                     }
-                    Console.WriteLine(alphabetIndex);
                 }
-                Node n = new Node(alphabet[alphabetIndex], laneHightLeft, startYPositionLeftNodes, 0);
-                nodes.Add(n);
-                laneHightLeft += laneHightLeft;
+                Node n2 = new Node(alphabet[alphabetIndex], laneHightLeft, 0, startZPositionLeftNodes);
+                nodes.Add(n2);
+                laneHightLeft += laneHight;
             }
 
+            int laneHightRight = laneHight;
             //Nodes in right row
-            for (int i = 0; i < rightRow; i++)
+            for (int i = 0; i < nrOfNodesLeftAndRight; i++)
             {
-                foreach (Node n2 in nodes)
+                foreach (Node node in nodes)
                 {
                     for (int j = 0; j < alphabet.Length; j++)
                     {
-                        if (n2.name == alphabet[j])
+                        if (node.name == alphabet[j])
                         {
                             alphabetIndex = j + 1;
                         }
                     }
-                    Console.WriteLine(alphabetIndex);
                 }
-                Node n = new Node(alphabet[alphabetIndex], laneHightRight, startYPositionRightsNodes, 0);
-                nodes.Add(n);
-                laneHightRight += laneHightRight;
+                Node node2 = new Node(alphabet[alphabetIndex], laneHightRight, 0, startZPositionRightsNodes);
+                nodes.Add(node2);
+                laneHightRight += laneHight;
             }
+
+            ////Adding Node Connections
+            //for (int i = 1; i < nodes.Count(); i++)
+            //{
+            int nrOfNodes = nodes.Count() - 1;
+            Console.WriteLine(nrOfNodes);
+            //    if (i == 1)//Left under corner node
+            //    {
+            //        foreach (Node n3 in nodes)
+            //        {
+            //            List<Node> nodeConnections = new List<Node>();
+            //            nodeConnections.Add(nodes[i + 1]);
+            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
+            //            n3.SetNodeConnection(nodeConnections);
+            //        }
+            //    }
+            //    else if (i == (nrOfNodes / 2) + 1)//Right under corner node
+            //    {
+            //        foreach (Node n3 in nodes)
+            //        {
+            //            List<Node> nodeConnections = new List<Node>();
+            //            nodeConnections.Add(nodes[i + 1]);
+            //            nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
+            //            n3.SetNodeConnection(nodeConnections);
+            //        }
+            //    }
+            //    else if (i == (nrOfNodes / 2))//Left upper corner node
+            //    {
+            //        foreach (Node n3 in nodes)
+            //        {
+            //            List<Node> nodeConnections = new List<Node>();
+            //            nodeConnections.Add(nodes[i - 1]);
+            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
+            //            n3.SetNodeConnection(nodeConnections);
+            //        }
+            //    }
+            //    else if (i == nrOfNodes)//Right upper corner node 
+            //    {
+            //        foreach (Node n3 in nodes)
+            //        {
+            //            List<Node> nodeConnections = new List<Node>();
+            //            nodeConnections.Add(nodes[i - 1]);
+            //            nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
+            //            n3.SetNodeConnection(nodeConnections);
+            //        }
+            //    }
+            //    else if (i < (nrOfNodes / 2) && i != 0 && i != (nrOfNodes / 2))
+            //    {
+            //        foreach (Node n3 in nodes)
+            //        {
+            //            List<Node> nodeConnections = new List<Node>();
+            //            nodeConnections.Add(nodes[i + 1]);
+            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
+            //        }
+            //    }
+            //    else if (i > (nrOfNodes / 2) && i != ((nrOfNodes / 2) + 1) && i != nrOfNodes)
+            //    {
+            //        foreach (Node n3 in nodes)
+            //        {
+            //            List<Node> nodeConnections = new List<Node>();
+            //            nodeConnections.Add(nodes[nrOfNodes]);
+            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
+            //            n3.SetNodeConnection(nodeConnections);
+            //        }
+            //    }
+            //}
         }
 
         private Scaffholding CreateScaffholding(double x, double y, double z)
