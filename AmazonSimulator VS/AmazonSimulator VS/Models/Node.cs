@@ -11,7 +11,7 @@ namespace Models
         public int x { get; set; }
         public int y { get; set; }
         public int z { get; set; }
-        public List<Node> nodes { get; set; }
+        public List<Node> nodes { get;  set; }
 
         public Node(char name, int x, int y, int z)
         {

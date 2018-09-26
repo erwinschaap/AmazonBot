@@ -18,16 +18,21 @@ namespace Models
         {
             CreateNodes(4, 10, 0, 10);
 
+            foreach (Node node in nodes)
+            {
+                Console.WriteLine("Node " + node.name + ": " + node.x + ", " + node.y + ", " + node.z + ", " + node.nodes.Count());
+                foreach (Node node1 in node.nodes)
+                {
+                    Console.WriteLine(node1.name);
+                }
+            }
+            Console.WriteLine("Nodes Count :" + nodes.Count());
+
             Truck truck = CreateTruck(0, 0, 0);
             truck.Move(0, 0, 0);
             Robot robot = CreateRobot(0, 0, 0);
             robot.Move(0, 0, 0);
 
-            foreach (Node node in nodes)
-            {
-                Console.WriteLine("Node " + node.name + ": " + node.x + ", " + node.y + ", " + node.z + ", " + node.nodes);
-            }
-            Console.WriteLine("Nodes Count :" + nodes.Count());
         }
 
         private void CreateNodes(int nrOfNodesLeftAndRight, int startZPositionLeftNodes, int startZPositionRightsNodes, int laneHight)
@@ -73,71 +78,76 @@ namespace Models
                 laneHightRight += laneHight;
             }
 
-            ////Adding Node Connections
-            //for (int i = 1; i < nodes.Count(); i++)
-            //{
-            int nrOfNodes = nodes.Count() - 1;
-            Console.WriteLine(nrOfNodes);
-            //    if (i == 1)//Left under corner node
-            //    {
-            //        foreach (Node n3 in nodes)
-            //        {
-            //            List<Node> nodeConnections = new List<Node>();
-            //            nodeConnections.Add(nodes[i + 1]);
-            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
-            //            n3.SetNodeConnection(nodeConnections);
-            //        }
-            //    }
-            //    else if (i == (nrOfNodes / 2) + 1)//Right under corner node
-            //    {
-            //        foreach (Node n3 in nodes)
-            //        {
-            //            List<Node> nodeConnections = new List<Node>();
-            //            nodeConnections.Add(nodes[i + 1]);
-            //            nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
-            //            n3.SetNodeConnection(nodeConnections);
-            //        }
-            //    }
-            //    else if (i == (nrOfNodes / 2))//Left upper corner node
-            //    {
-            //        foreach (Node n3 in nodes)
-            //        {
-            //            List<Node> nodeConnections = new List<Node>();
-            //            nodeConnections.Add(nodes[i - 1]);
-            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
-            //            n3.SetNodeConnection(nodeConnections);
-            //        }
-            //    }
-            //    else if (i == nrOfNodes)//Right upper corner node 
-            //    {
-            //        foreach (Node n3 in nodes)
-            //        {
-            //            List<Node> nodeConnections = new List<Node>();
-            //            nodeConnections.Add(nodes[i - 1]);
-            //            nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
-            //            n3.SetNodeConnection(nodeConnections);
-            //        }
-            //    }
-            //    else if (i < (nrOfNodes / 2) && i != 0 && i != (nrOfNodes / 2))
-            //    {
-            //        foreach (Node n3 in nodes)
-            //        {
-            //            List<Node> nodeConnections = new List<Node>();
-            //            nodeConnections.Add(nodes[i + 1]);
-            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
-            //        }
-            //    }
-            //    else if (i > (nrOfNodes / 2) && i != ((nrOfNodes / 2) + 1) && i != nrOfNodes)
-            //    {
-            //        foreach (Node n3 in nodes)
-            //        {
-            //            List<Node> nodeConnections = new List<Node>();
-            //            nodeConnections.Add(nodes[nrOfNodes]);
-            //            nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
-            //            n3.SetNodeConnection(nodeConnections);
-            //        }
-            //    }
-            //}
+            //Adding Node Connections
+            for (int i = 0; i < nodes.Count(); i++)
+            {
+                int nrOfNodes = nodes.Count() - 1;
+                if( i == 0)
+                {
+                    Node n3 = nodes[i];
+                    List<Node> nodeConnections;
+                    nodeConnections = new List<Node>();
+                    nodeConnections.Add(nodes[i + 1]);
+                    nodeConnections.Add(nodes[(nrOfNodes / 2) + 1]);
+                    n3.SetNodeConnection(nodeConnections);
+                }
+                else if (i == 1)//Left under corner node
+                {
+                    Node n3 = nodes[i];
+                    List<Node> nodeConnections;
+                    nodeConnections = new List<Node>();
+                    nodeConnections.Add(nodes[i + 1]);
+                    nodeConnections.Add(nodes[0]);
+                    nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
+                    n3.SetNodeConnection(nodeConnections);
+                }
+                else if (i == (nrOfNodes / 2) + 1)//Right under corner node
+                {
+                    Node n3 = nodes[i];
+                    List<Node> nodeConnections = new List<Node>();
+                    nodeConnections.Add(nodes[i + 1]);
+                    nodeConnections.Add(nodes[0]);
+                    nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
+                    n3.SetNodeConnection(nodeConnections);
+                }
+                else if (i == (nrOfNodes / 2))//Left upper corner node
+                {
+                    Node n3 = nodes[i];
+
+                    List<Node> nodeConnections = new List<Node>();
+                    nodeConnections.Add(nodes[i - 1]);
+                    nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
+                    n3.SetNodeConnection(nodeConnections);
+                }
+                else if (i == nrOfNodes)//Right upper corner node 
+                {
+                    Node n3 = nodes[i];
+
+                    List<Node> nodeConnections = new List<Node>();
+                    nodeConnections.Add(nodes[i - 1]);
+                    n3.SetNodeConnection(nodeConnections);
+                }
+                else if (i < (nrOfNodes / 2) && i != 0 && i != (nrOfNodes / 2))//All nodes on the left side whom are no corners
+                {
+                    Node n3 = nodes[i];
+
+                    List<Node> nodeConnections = new List<Node>();
+                    nodeConnections.Add(nodes[i + 1]);
+                    nodeConnections.Add(nodes[i - 1]);
+                    nodeConnections.Add(nodes[i + (nrOfNodes / 2)]);
+                    n3.SetNodeConnection(nodeConnections);
+                }
+                else if (i > (nrOfNodes / 2) && i != ((nrOfNodes / 2) + 1) && i != nrOfNodes)//All nodes on the right side whom are no corners
+                {
+                    Node n3 = nodes[i];
+
+                    List<Node> nodeConnections = new List<Node>();
+                    nodeConnections.Add(nodes[i + 1]);
+                    nodeConnections.Add(nodes[i - 1]);
+                    nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
+                    n3.SetNodeConnection(nodeConnections);
+                }
+            }
         }
 
         private Scaffholding CreateScaffholding(double x, double y, double z)
