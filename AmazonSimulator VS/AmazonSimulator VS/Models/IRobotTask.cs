@@ -5,11 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Tasks: IRobotTask
+    public interface IRobotTask
     {
-        
-        public void MoveRobot()
-        { 
-        }
     }
 }

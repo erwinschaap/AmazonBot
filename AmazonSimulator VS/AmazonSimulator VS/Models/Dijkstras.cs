@@ -15,12 +15,16 @@ namespace Models
 
             char name = node.name;
             Dictionary<char, int> edges = new Dictionary<char, int>();
-            foreach(Node node1 in nodesList)
+            foreach (Node node1 in nodesList)
             {
                 int dist = CalculateDistance(node, node1);
                 edges.Add(node1.name, dist);
             }
             vertices[name] = edges;
+        }
+        public Dictionary<char, Dictionary<char, int>> ShowVertices()
+        {
+            return this.vertices;
         }
 
         public List<Node> ShortestPath(char start, char finish, List<Node> nodes)
@@ -29,8 +33,8 @@ namespace Models
             var distances = new Dictionary<char, int>();
             var nodesCharList = new List<char>();
 
-            List<char> path = null;
-            List<Node> nodesPath = null;
+            List<char> path = new List<char>();
+            List<Node> nodesPath = new List<Node>();
 
             foreach (var vertex in vertices)
             {
@@ -55,7 +59,6 @@ namespace Models
 
                 if (smallest == finish)
                 {
-                    path = new List<char>();
                     while (previous.ContainsKey(smallest))
                     {
                         path.Add(smallest);
@@ -81,14 +84,19 @@ namespace Models
                 }
             }
             path.Add(start);
-            path.Reverse();
+
             for (int i = 0; i < nodes.Count; i++)
             {
-                foreach (Node item in nodes)
+                foreach (char c in path)
                 {
-                    nodes.Add(item);
+                    if(c == nodes[i].name)
+                    {
+                        nodesPath.Add(nodes[i]);
+                    }
                 }
+
             }
+            //nodesPath.Reverse();
             return nodesPath;
             //return path;
         }

@@ -9,20 +9,17 @@ namespace Models
     {
         public List<Node> destinations = new List<Node>();
         public double speed = 1;
+
         public Robot(double x, double y, double z, double rotationX, double rotationY, double rotationZ) :
-            base("robot", x, y, z, rotationX, rotationY, rotationZ)
-        {
-        }
+            base("robot", x, y, z, rotationX, rotationY, rotationZ){}
 
         public override void Move(double x, double y, double z)
         {
-
             base.Move(x, y, z);
         }
 
         public override bool Update(int tick)
         {
-
             return base.Update(tick);
         }
 

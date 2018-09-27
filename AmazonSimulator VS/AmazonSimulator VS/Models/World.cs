@@ -9,6 +9,7 @@ namespace Models
     {
         private List<Model3D> worldObjects = new List<Model3D>();
         private List<Node> nodes = new List<Node>();
+        private Graph  graph = new Graph();
         private List<IObserver<Command>> observers = new List<IObserver<Command>>();
         private double moveTruck = 0;
         public char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
@@ -23,11 +24,18 @@ namespace Models
                 Console.WriteLine("Node " + node.name + ": " + node.x + ", " + node.y + ", " + node.z + ", " + node.nodes.Count());
                 foreach (Node node1 in node.nodes)
                 {
-                    Console.WriteLine(node1.name);
+                    Console.WriteLine(" " + node1.name);
                 }
             }
             Console.WriteLine("Nodes Count :" + nodes.Count());
 
+            foreach (Node node in graph.ShortestPath('A', 'C', nodes))
+            {
+                Console.WriteLine("Node Path");
+                Console.WriteLine("Node " + node.name + ": " + node.x + ", " + node.y + ", " + node.z );
+            }
+            
+            
             Truck truck = CreateTruck(0, 0, 0);
             truck.Move(0, 0, 0);
             Robot robot = CreateRobot(0, 0, 0);
@@ -125,6 +133,7 @@ namespace Models
 
                     List<Node> nodeConnections = new List<Node>();
                     nodeConnections.Add(nodes[i - 1]);
+                    nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
                     n3.SetNodeConnection(nodeConnections);
                 }
                 else if (i < (nrOfNodes / 2) && i != 0 && i != (nrOfNodes / 2))//All nodes on the left side whom are no corners
@@ -147,6 +156,11 @@ namespace Models
                     nodeConnections.Add(nodes[i - (nrOfNodes / 2)]);
                     n3.SetNodeConnection(nodeConnections);
                 }
+            }
+
+            foreach(Node node in nodes)
+            {
+                graph.AddVertex(node);
             }
         }
 
