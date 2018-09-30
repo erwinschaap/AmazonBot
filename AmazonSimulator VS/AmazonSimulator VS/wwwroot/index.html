@@ -65,7 +65,7 @@
                 cameraControls.update();
                 renderer.render(scene, camera);
             }
-            
+
             function loadOBJModel(modelPath, modelName, texturePath, textureName, onload) {
                 new THREE.MTLLoader()
                     .setPath(texturePath)
@@ -92,36 +92,38 @@
                     if (Object.keys(worldObjects).indexOf(command.parameters.guid) < 0) {
 
                         if (command.parameters.type === "truck") {
+                            var truck = new Truck();
+                            scene.add(truck);
+                            worldObjects[command.parameters.guid] = truck;
+                            //building = new THREE.Group();
+                            //scene.add(building);
+                            //worldObjects[command.parameters.guid] = building;
 
-                            building = new THREE.Group();
-                            scene.add(building);
-                            worldObjects[command.parameters.guid] = building;
+                            //loadOBJModel("/models/", "Santasleigh.obj", "/models/", "Santasleigh.mtl", (mesh) => {
+                            //    building.position.y = 5;
 
-                            loadOBJModel("/models/", "Santasleigh.obj", "/models/", "Santasleigh.mtl", (mesh) => {
-                                building.position.y = 5;
-
-                                building.add(mesh);
-                            });
-                            
+                            //    building.add(mesh);
+                            //});
                         }
-
                         if (command.parameters.type === "robot") {
-                            var geometry = new THREE.BoxGeometry(0.9, 0.3, 0.9);
-                            var cubeMaterials = [
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //LEFT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //RIGHT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_top.png"), side: THREE.DoubleSide }), //TOP
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_bottom.png"), side: THREE.DoubleSide }), //BOTTOM
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //FRONT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //BACK
-                            ];
-                            var material = new THREE.MeshFaceMaterial(cubeMaterials);
-                            var robot = new THREE.Mesh(geometry, material);
-                            robot.position.y = 0.15;
+                            var robot = new Robot();
+                            scene.add(robot);
+                            worldObjects[command.parameters.guid] = robot;
+                        }
+                        if (command.parameters.type === "scaffholding") {
+                            var scaffholding = new Scaffholding();
+                            scene.add(scaffholding);
+                            worldObjects[command.parameters.guid] = scaffholding;
+                        }
+                        if (command.parameters.type == "placeholder") {
+                            var geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+                            var color = new THREE.Color("rgb(52, 152, 219)");
+                            var material = new THREE.MeshBasicMaterial({ color: 0x6816e0 });
+                            var placeholder = new THREE.Mesh(geometry, material);
+                            placeholder.position.y = 0.15;
 
                             var group = new THREE.Group();
-                            group.add(robot);
-
+                            group.add(placeholder);
                             scene.add(group);
                             worldObjects[command.parameters.guid] = group;
                         }
@@ -145,9 +147,12 @@
         }
     </script>
     <script src="three.min.js"></script>
-    <script src="OrbitControls.js"></script>
-    <script src="ObjectalLoader.js"></script>
-    <script src="OBJLoader.js"></script>
+    <script src="js/loaders/OBJLoader.js"></script>
+    <script src="js/loaders/MTLLoader.js"></script>
+    <script src="js/controllers/OrbitControls.js"></script>
+    <script src="models/robot/Robot.js"></script>
+    <script src="models/scaffholding/Scaffholding.js"></script>
+    <script src="models/truck/Truck.js"></script>
     <script src="MTLLoader.js"></script>
 </body>
 </html>
