@@ -7,9 +7,20 @@ namespace Models
 {
     public class Tasks: IRobotTask
     {
+        private bool Complete = false;
         
         public void MoveRobot()
         { 
+        }
+
+        public void StartTask(Robot robot)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TaskComplete(Robot robot)
+        {
+            throw new NotImplementedException();
         }
     }
 }

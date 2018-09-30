@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Model3D
+    public class Model3D: Calculations
     {
         public string type;
         private double _x = 0;

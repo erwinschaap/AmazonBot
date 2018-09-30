@@ -15,7 +15,16 @@ namespace Models
 
         public override void Move(double x, double y, double z)
         {
+            foreach(Node node in destinations)
+            {
+                
+            }
             base.Move(x, y, z);
+        }
+
+        public void MoveOverPath(List<Node> nodes)
+        {
+
         }
 
         public override bool Update(int tick)

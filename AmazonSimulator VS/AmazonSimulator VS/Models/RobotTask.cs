@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class MoveRobot
+    public interface IRobotTask
     {
+        void StartTask(Robot robot);
+
+        bool TaskComplete(Robot robot);
     }
 }

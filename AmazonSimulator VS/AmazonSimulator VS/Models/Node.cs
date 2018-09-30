@@ -8,12 +8,12 @@ namespace Models
     public class Node
     {
         public char name { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
-        public int z { get; set; }
+        public double x { get; set; }
+        public double y { get; set; }
+        public double z { get; set; }
         public List<Node> nodes { get;  set; }
 
-        public Node(char name, int x, int y, int z)
+        public Node(char name, double x, double y, double z)
         {
             this.name = name;
             this.x = x;
