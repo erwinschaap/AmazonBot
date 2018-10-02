@@ -5,11 +5,19 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class RobotDeliver : IUpdatable
+    public class RobotDeliver : IRobotTask
     {
-        public bool Update(int tick)
+        private bool complete = false;
+
+        public void StartTask(Robot robot)
         {
-            throw new NotImplementedException();
+            robot.DropScaffholding();
+            complete = true;
+        }
+
+        public bool TaskComplete(Robot robot)
+        {
+            return complete;
         }
     }
 }

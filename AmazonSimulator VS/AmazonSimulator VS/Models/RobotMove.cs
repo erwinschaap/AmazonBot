@@ -7,8 +7,6 @@ namespace Models
 {
     public class RobotMove : IRobotTask
     {
-        private bool startupComplete = false;
-        private bool complete = false;
         private List<Node> path;
 
         public RobotMove(List<Node> path)

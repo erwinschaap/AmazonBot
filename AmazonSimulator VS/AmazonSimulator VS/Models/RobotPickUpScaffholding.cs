@@ -5,11 +5,25 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class RobotPickUpScaffholding : IUpdatable
+    public class RobotPickUpScaffholding : IRobotTask
     {
-        public bool Update(int tick)
+        private Scaffholding scaffholding;
+        private bool complete = false;
+
+        public RobotPickUpScaffholding(Scaffholding scaffholding)
         {
-            throw new NotImplementedException();
+            this.scaffholding = scaffholding;
+        }
+
+        public void StartTask(Robot robot)
+        {
+            robot.SetScaffholding(scaffholding);
+            complete = true;
+        }
+
+        public bool TaskComplete(Robot robot)
+        {
+            return complete;
         }
     }
 }

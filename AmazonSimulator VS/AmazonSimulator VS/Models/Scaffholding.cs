@@ -9,8 +9,7 @@ namespace Models
     {
         public Scaffholding(double x, double y, double z, double rotationX, double rotationY, double rotationZ) :
             base("scaffholding", x, y, z, rotationX, rotationY, rotationZ)
-        {
-        }
+        { }
 
         //public override bool Update(int tick)
         //{

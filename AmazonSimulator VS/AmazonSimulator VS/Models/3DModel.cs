@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Model3D: Calculations
+    public class Model3D
     {
         public string type;
         private double _x = 0;
@@ -24,11 +24,7 @@ namespace Models
         public double rotationY { get { return _rY; } }
         public double rotationZ { get { return _rZ; } }
 
-        public double deltaX { get; set; }
-        public double deltaY { get; set; }
-
         public bool needsUpdate = true;
-
 
         public Model3D(string type, double x, double y, double z, double rotationX, double rotationY, double rotationZ)
         {

@@ -21,12 +21,28 @@ namespace Models
 
         public World()
         {
-            List<Robot> robots = new List<Robot>();
-            robots.Add(CreateRobot(0, 0, 0));
-
-            //this.worldManager = new WorldManager(robots,...,...);
-
             GeneratePathNodes(4, 30, 5, 5, 5, 3);
+            List<Robot> robots = new List<Robot>();
+            robots.Add(CreateRobot(nodes[0].x, nodes[0].y, nodes[0].z));
+
+            List<Scaffholding> scaffholdings = new List<Scaffholding>();
+            foreach (Node node in nodes)
+            {
+                graph.AddVertex(node);
+                CreatePlaceholder(node.x, node.y, node.z);
+                for (int i = 0; i < alphabetScaffholdingNodes.Length; i++)
+                {
+                    if (node.name.Equals(alphabetScaffholdingNodes[i]))
+                    {
+                        scaffholdings.Add(CreateScaffholding(node.x, node.y, node.z));
+                    }
+                }
+            }
+
+            List<Truck> trucks = new List<Truck>();
+            trucks.Add(CreateTruck(0, 0, 0));
+            WorldManager worldManager = new WorldManager(robots, scaffholdings, trucks);
+
 
             Console.WriteLine("Nodes Count :" + nodes.Count());
 
@@ -41,10 +57,6 @@ namespace Models
                 }
             }
             Console.WriteLine("Nodes Count :" + nodes.Count());
-
-            Truck truck = CreateTruck(0, 0, 0);
-            Robot robot = CreateRobot(0, 0, 0);
-            
         }
         private void CreateNode(char name, double x, double y, double z)
         {
@@ -297,19 +309,6 @@ namespace Models
                 //    nodeConnections.Add(nodes[i - nrOfNodesLeftAndRight]);
                 //    n3.SetNodeConnection(nodeConnections);
                 //}
-            }
-
-            foreach (Node node in nodes)
-            {
-                //graph.AddVertex(node);
-                CreatePlaceholder(node.x, node.y, node.z);
-                for (int i = 0; i < alphabetScaffholdingNodes.Length; i++)
-                {
-                    if (node.name.Equals(alphabetScaffholdingNodes[i]))
-                    {
-                        CreateScaffholding(node.x, node.y, node.z);
-                    }
-                }
             }
         }
 

@@ -8,7 +8,6 @@ namespace Models
     public class Robot : Model3D, IUpdatable
     {
         private double speed = 50;
-        private Node destination;
         private Scaffholding hasScaffholding;
 
         private List<IRobotTask> tasks = new List<IRobotTask>();
@@ -36,23 +35,33 @@ namespace Models
 
         public void MoveTo(Node node)
         {
-            this.destination = node;
+            Move(node.x, node.y, node.z);
+        }
+
+        public void SetScaffholding(Scaffholding scaffholding)
+        {
+            this.hasScaffholding = scaffholding;
+        }
+
+        public void DropScaffholding()
+        {
+            this.hasScaffholding = null;
         }
 
         public override bool Update(int tick)
         {
-            //if(tasks.Count > 0)
-            //{
-            //   if(tasks.First().TaskComplete(this))
-            //    {
-            //        tasks.RemoveAt(0);
+            if (tasks.Count > 0)
+            {
+                if (tasks.First().TaskComplete(this))
+                {
+                    tasks.RemoveAt(0);
 
-            //        if(tasks.Count > 0)
-            //        {
-            //            tasks.First().StartTask(this);
-            //        }
-            //    }
-            //}
+                    if (tasks.Count > 0)
+                    {
+                        tasks.First().StartTask(this);
+                    }
+                }
+            }
 
             //double currentX = this.x;
 
