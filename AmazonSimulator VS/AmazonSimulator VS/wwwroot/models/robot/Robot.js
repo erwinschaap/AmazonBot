@@ -20,8 +20,6 @@
         robot.position.y = 0.15;
         robot.name = "robot";
         robot.userData = { status: "idle" };
-
-        var group = new THREE.Group();
         selfRef.add(robot);
     }
 }

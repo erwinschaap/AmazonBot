@@ -18,6 +18,7 @@
             objLoader.setPath('models/scaffholding/');
             objLoader.load('Present_house.obj', function (object) {
                 var group = new THREE.Group();
+                object.position.y = 1.5;
                 group.add(object);
                 selfRef.add(group);
             });

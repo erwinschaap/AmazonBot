@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Tasks: IRobotTask
+    public class Task : IRobotTask
     {
         private bool Complete = false;
-        
+
         public void MoveRobot()
-        { 
+        {
         }
 
         public void StartTask(Robot robot)

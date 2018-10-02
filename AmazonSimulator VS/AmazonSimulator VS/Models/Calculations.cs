@@ -7,7 +7,7 @@ namespace Models
 {
     public class Calculations
     {
-        public int CalculateDistance(Node begin, Node end)
+        public static int CalculateDistance(Node begin, Node end)
         {
             int phytagoras = Convert.ToInt32(Math.Round(5.542 , 1));
             return phytagoras;
